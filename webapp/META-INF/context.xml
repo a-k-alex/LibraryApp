@@ -1,0 +1,9 @@
+<Context>
+    <Resource name="jdbc/librarydb" auth="Container" type="javax.sql.DataSource"
+              maxTotal="2" maxIdle="1" maxWaitMillis="2"
+              defaultAutoCommit="false"
+              username="root" password="root"
+              defaultTransactionIsolation="READ_COMMITTED"
+              driverClassName="org.mariadb.jdbc.Driver"
+              url="jdbc:mysql://localhost:3306/librarydb"/>
+</Context>

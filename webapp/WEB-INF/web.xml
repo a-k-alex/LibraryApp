@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+         version="2.5">
+    <display-name>Library Application</display-name>
+    <!--************************************************************************************************************-->
+    <!--LISTENER-->
+    <!--************************************************************************************************************-->
+    <listener>
+        <listener-class>ua.alekseytsev.LibraryApp.web.listeners.ContextListener</listener-class>
+    </listener>
+    <!--************************************************************************************************************-->
+    <!--ENCODING FILTER-->
+    <!--************************************************************************************************************-->
+    <filter>
+        <filter-name>EncodingFilter</filter-name>
+        <filter-class>ua.alekseytsev.LibraryApp.web.filters.EncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>EncodingFilter</filter-name>
+        <servlet-name>Controller</servlet-name>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>EncodingFilter</filter-name>
+        <url-pattern>/controller/*</url-pattern>
+    </filter-mapping>
+    <!--************************************************************************************************************-->
+    <!--SECURITY FILTER-->
+    <!--************************************************************************************************************-->
+    <filter>
+        <filter-name>FilterSecurity</filter-name>
+        <filter-class>ua.alekseytsev.LibraryApp.web.filters.FilterSecurity</filter-class>
+        <init-param>
+            <param-name>common commands</param-name>
+            <param-value>login,showCategory,showCategories,search,register,language,sortBooks</param-value>
+        </init-param>
+        <init-param>
+            <param-name>reader commands</param-name>
+            <param-value>orderBook,profile,myBooks,myFines,logout</param-value>
+        </init-param>
+        <init-param>
+            <param-name>librarian commands</param-name>
+            <param-value>listOrders,changeOrderStatus,listFines,paidFine</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>FilterSecurity</filter-name>
+        <url-pattern>/controller/*</url-pattern>
+    </filter-mapping>
+
+    <!--************************************************************************************************************-->
+    <!--SERVLETS-->
+    <!--************************************************************************************************************-->
+    <servlet>
+        <servlet-name>Controller</servlet-name>
+        <servlet-class>ua.alekseytsev.LibraryApp.web.controller.Controller</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Controller</servlet-name>
+        <url-pattern>/controller/*</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>View</servlet-name>
+        <servlet-class>ua.alekseytsev.LibraryApp.web.controller.ViewController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>View</servlet-name>
+        <url-pattern>/view</url-pattern>
+    </servlet-mapping>
+
+    <!--************************************************************************************************************-->
+    <!--DATA SOURCE-->
+    <!--************************************************************************************************************-->
+    <resource-ref>
+        <description>Datasource</description>
+        <res-ref-name>jdbc/librarydb</res-ref-name>
+        <res-type>javax.sql.DataSource</res-type>
+        <res-auth>Container</res-auth>
+    </resource-ref>
+    <!--************************************************************************************************************-->
+    <!--START PAGE-->
+    <!--************************************************************************************************************-->
+    <welcome-file-list>
+        <welcome-file>login.jsp</welcome-file>
+    </welcome-file-list>
+    <!--<error-page>-->
+    <!--<exception-type>java.lang.Throwable</exception-type>-->
+    <!--<location>/jsp/errorPage.jsp</location>-->
+    <!--</error-page>-->
+    <!--<error-page>-->
+    <!--<error-code>404</error-code>-->
+    <!--<location>/jsp/errorPage.jsp</location>-->
+    <!--</error-page>-->
+</web-app>

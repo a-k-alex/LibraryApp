@@ -1,0 +1,10 @@
+<fmt:setLocale value="${language}"/>
+<fmt:setBundle basename="text"/>
+<head>
+    <title>
+        Library
+    </title>
+    <!-- Bootstrap core CSS -->
+    <link href="../bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../bootstrap/css/languages.min.css" rel="stylesheet">
+</head>
